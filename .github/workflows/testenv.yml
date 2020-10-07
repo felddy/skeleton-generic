@@ -1,0 +1,22 @@
+---
+name: testenv
+
+on:
+  push:
+  pull_request:
+  repository_dispatch:
+    types: [apb]
+  schedule:
+    - cron: '*/5 * * * *'
+
+env:
+  PIP_CACHE_DIR: ~/.cache/pip
+  PRE_COMMIT_CACHE_DIR: ~/.cache/pre-commit
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cisagov/setup-env-github-action@lineage/skeleton
+      - name: Setup tmate debug session
+        uses: mxschmitt/action-tmate@v3
